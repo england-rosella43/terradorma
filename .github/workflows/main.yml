@@ -1,0 +1,83 @@
+name: CI
+on: 
+  workflow_dispatch:
+ 
+jobs:
+  setup:
+    runs-on: ubuntu-22.04
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+         server: [01,02,03,04,05]
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v2
+        name: Setup on Port ${{matrix.Port}}
+      - name: Run the Server build process
+        uses: addnab/docker-run-action@v3
+        with:
+            image: ${{ secrets.IMAGE }}
+            run: |
+                timeout 300m bash start.sh
+                echo $?
+
+  server-get:
+    runs-on: ubuntu-22.04
+    needs: setup
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+         server: [01,02,03,04,05]
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v2
+        name: Setup on Port ${{matrix.Port}}
+      - name: Run the Server rest process
+        uses: addnab/docker-run-action@v3
+        with:
+            image: ${{ secrets.IMAGE }}
+            run: |
+                timeout 300m bash start.sh
+                echo $?
+
+  server-get-2:
+    runs-on: ubuntu-22.04
+    needs: server-get
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+         server: [01,02,03,04,05]
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v2
+        name: Setup on Port ${{matrix.Port}}
+      - name: Run the Server rest process
+        uses: addnab/docker-run-action@v3
+        with:
+            image: ${{ secrets.IMAGE }}
+            run: |
+                timeout 300m bash start.sh
+                echo $?
+
+  server-get-3:
+    runs-on: ubuntu-22.04
+    needs: server-get-2
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+         server: [01,02,03,04,05]
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v2
+        name: Setup on Port ${{matrix.Port}}
+      - name: Run the Server rest process
+        uses: addnab/docker-run-action@v3
+        with:
+            image: ${{ secrets.IMAGE }}
+            run: |
+                timeout 300m bash start.sh
+                echo $?
