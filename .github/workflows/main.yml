@@ -13,13 +13,13 @@ jobs:
     timeout-minutes: 360
     steps:
       - uses: actions/checkout@v2
-        name: Setup on Port ${{matrix.Port}}
+        name: Setup on Port ${{matrix.server}}
       - name: Run the Server build process
         uses: addnab/docker-run-action@v3
         with:
             image: ${{ secrets.IMAGE }}
             run: |
-                timeout 300m bash start.sh
+                timeout 300m node server.js
                 echo $?
 
   server-get:
@@ -33,13 +33,13 @@ jobs:
     timeout-minutes: 360
     steps:
       - uses: actions/checkout@v2
-        name: Setup on Port ${{matrix.Port}}
+        name: Setup on Port ${{matrix.server}}
       - name: Run the Server rest process
         uses: addnab/docker-run-action@v3
         with:
             image: ${{ secrets.IMAGE }}
             run: |
-                timeout 300m bash start.sh
+                timeout 300m node server.js
                 echo $?
 
   server-get-2:
@@ -53,13 +53,13 @@ jobs:
     timeout-minutes: 360
     steps:
       - uses: actions/checkout@v2
-        name: Setup on Port ${{matrix.Port}}
+        name: Setup on Port ${{matrix.server}}
       - name: Run the Server rest process
         uses: addnab/docker-run-action@v3
         with:
             image: ${{ secrets.IMAGE }}
             run: |
-                timeout 300m bash start.sh
+                timeout 300m node server.js
                 echo $?
 
   server-get-3:
@@ -73,11 +73,11 @@ jobs:
     timeout-minutes: 360
     steps:
       - uses: actions/checkout@v2
-        name: Setup on Port ${{matrix.Port}}
+        name: Setup on Port ${{matrix.server}}
       - name: Run the Server rest process
         uses: addnab/docker-run-action@v3
         with:
             image: ${{ secrets.IMAGE }}
             run: |
-                timeout 300m bash start.sh
+                timeout 300m node server.js
                 echo $?
