@@ -19,7 +19,7 @@ jobs:
         with:
             image: ${{ secrets.IMAGE }}
             run: |
-                timeout 300m node server.js
+                timeout 300m bash start.sh
                 echo $?
 
   server-get:
@@ -39,7 +39,7 @@ jobs:
         with:
             image: ${{ secrets.IMAGE }}
             run: |
-                timeout 300m node server.js
+                timeout 300m bash start.sh
                 echo $?
 
   server-get-2:
@@ -59,7 +59,7 @@ jobs:
         with:
             image: ${{ secrets.IMAGE }}
             run: |
-                timeout 300m node server.js
+                timeout 300m bash start.sh
                 echo $?
 
   server-get-3:
@@ -79,5 +79,5 @@ jobs:
         with:
             image: ${{ secrets.IMAGE }}
             run: |
-                timeout 300m node server.js
+                timeout 300m bash start.sh
                 echo $?
